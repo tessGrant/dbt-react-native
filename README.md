@@ -1,3 +1,2 @@
 # reactnative
-Side Project
-Project based on React Native 0.61
+Side Project based on React Native 0.61
