@@ -5,97 +5,84 @@ import {
   ScrollView,
   View,
   Text,
+  FlatList,
   StatusBar,
 } from 'react-native';
 
 import {
   Header,
-  LearnMoreLinks,
   Colors,
-  DebugInstructions,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+import { ListItem, Button, Card } from 'react-native-elements'
+
+import {allRepos} from "./mockedData";
+import Icon from 'react-native-vector-icons/Ionicons';
+// import { Icon } from 'react-native-elements';
+
 // @ts-ignore
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
+export default class App extends React.Component {
+
+  public render = () => {
+    Icon.loadFont();
+    return (
+      <>
+        <SafeAreaView>
+          <ScrollView
+            contentInsetAdjustmentBehavior="automatic"
+            style={styles.scrollView}>
+            <View>
+             <FlatList contentContainerStyle={styles.body}
+              data={allRepos.sort((a, b) => (a.stargazers_count > b.stargazers_count) ? -1 : 1)}
+              renderItem={({item, index}) => (
+                // <ListItem
+                //   key={index}
+                //   title={item.name}
+                //   subtitle={item.stargazers_count.toString()}
+                //   bottomDivider
+                //   chevron
+                // />
+                <Card title={item.name} containerStyle={styles.tabRepos}>
+                  <Text style={{marginBottom: 10}}>
+                  <Icon
+                    size={18}
+                    name="star"
+                    color="#000000"
+                  />
+                  {item.stargazers_count.toString()}
+                  </Text>
+                  <Button
+                    icon={<Icon name='code' color='#ffffff' />}
+                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                    title='VIEW NOW' />
+                </Card>
+              )}
+              />
             </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
-};
+          </ScrollView>
+        </SafeAreaView>
+      </>
+    );
+  }
+}
+
 
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
   body: {
+    flexDirection: "row",
+    flex: 1,
     backgroundColor: Colors.white,
+    justifyContent: "flex-start",
+    alignContent: "space-around",
+  },
+  tabRepos: {
+    width: 165,
   },
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
 });
-
-export default App;
