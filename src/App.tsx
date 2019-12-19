@@ -14,52 +14,43 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
-import { ListItem, Button, Card } from 'react-native-elements'
+import { Button, Card } from 'react-native-elements'
 
 import {allRepos} from "./mockedData";
-import Icon from 'react-native-vector-icons/Ionicons';
-// import { Icon } from 'react-native-elements';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-// @ts-ignore
 export default class App extends React.Component {
-
   public render = () => {
-    Icon.loadFont();
+    Ionicons.loadFont();
     return (
       <>
         <SafeAreaView>
-          <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
-            style={styles.scrollView}>
-            <View>
-             <FlatList contentContainerStyle={styles.body}
+          <View>
+             <FlatList
+             contentContainerStyle={styles.body}
+              horizontal={false}
+              numColumns={2}
               data={allRepos.sort((a, b) => (a.stargazers_count > b.stargazers_count) ? -1 : 1)}
-              renderItem={({item, index}) => (
-                // <ListItem
-                //   key={index}
-                //   title={item.name}
-                //   subtitle={item.stargazers_count.toString()}
-                //   bottomDivider
-                //   chevron
-                // />
+              renderItem={({item}) => (
                 <Card title={item.name} containerStyle={styles.tabRepos}>
-                  <Text style={{marginBottom: 10}}>
-                  <Icon
-                    size={18}
-                    name="star"
-                    color="#000000"
-                  />
-                  {item.stargazers_count.toString()}
-                  </Text>
+                  <View style={{marginBottom: 10, justifyContent: "center", flexDirection: "row"}}>
+                    <Ionicons
+                      size={16}
+                      name='ios-star'
+                      color='#000000'
+                    />
+                    <Text style={{marginLeft: 5, fontSize: 14}}>
+                    {item.stargazers_count.toString()}
+                    </Text>
+                  </View>
                   <Button
-                    icon={<Icon name='code' color='#ffffff' />}
-                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                    title='VIEW NOW' />
+                    icon={<Ionicons size={26} name='ios-code' color='#ffffff' style={{marginHorizontal: 5, marginTop: 5}} />}
+                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0,}}
+                    title='Details' />
                 </Card>
               )}
               />
-            </View>
-          </ScrollView>
+          </View>
         </SafeAreaView>
       </>
     );
@@ -72,11 +63,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.lighter,
   },
   body: {
-    flexDirection: "row",
-    flex: 1,
     backgroundColor: Colors.white,
-    justifyContent: "flex-start",
-    alignContent: "space-around",
   },
   tabRepos: {
     width: 165,

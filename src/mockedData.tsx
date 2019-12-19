@@ -43,5 +43,71 @@ export const allRepos = [
           login: "Some Name"
       }
     },
+    {
+      id: 4,
+      name: "Art.5",
+      stargazers_count: 76,
+      forks: 7,
+      description: "and this is about Art.5",
+      owner: {
+          avatar_url: "",
+          login: "Some Name"
+      }
+    },
+    {
+      id: 5,
+      name: "Art.6",
+      stargazers_count: 123,
+      forks: 90,
+      description: "and this is about Art.6",
+      owner: {
+          avatar_url: "",
+          login: "Some Name"
+      }
+    },
+    {
+      id: 6,
+      name: "Art.7",
+      stargazers_count: 876,
+      forks: 35,
+      description: "and this is about Art.7",
+      owner: {
+          avatar_url: "",
+          login: "Some Name"
+      }
+    },
+    {
+      id: 7,
+      name: "Art.8",
+      stargazers_count: 456,
+      forks: 35,
+      description: "and this is about Art.8",
+      owner: {
+          avatar_url: "",
+          login: "Some Name"
+      }
+    },
+    {
+      id: 8,
+      name: "Art.9",
+      stargazers_count: 345,
+      forks: 35,
+      description: "and this is about Art.9",
+      owner: {
+          avatar_url: "",
+          login: "Some Name"
+      }
+    },
+    {
+      id: 9,
+      name: "Art.10",
+      stargazers_count: 777,
+      forks: 77,
+      description: "and this is about Art.10",
+      owner: {
+          avatar_url: "",
+          login: "Some Name"
+      }
+    },
   ];
   
