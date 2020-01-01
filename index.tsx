@@ -2,13 +2,7 @@ import {AppRegistry} from "react-native";
 import App from "./src/App";
 import {name as appName} from "./app.json";
 import 'react-native-gesture-handler';
-// import {Provider} from "react-redux";
-import React from "react";
 
-// const AppContainer = () =>
-//     <Provider>
-//         <App />
-//     </Provider>
+console.disableYellowBox = true;
 
-// AppRegistry.registerComponent(appName, () => AppContainer);
 AppRegistry.registerComponent(appName, () => App);

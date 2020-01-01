@@ -1,4 +1,6 @@
-export const allRepos = [
+import {Repo} from "./interfaces";
+
+export const allRepos: Repo[] = [
     {
       id: 0,
       name: "Art.1",

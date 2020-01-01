@@ -1,45 +1,25 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  FlatList,
-} from 'react-native';
+import {useSelector} from "react-redux";
+import { View } from 'react-native';
 
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
+import { SearchBar } from 'react-native-elements'
 
-import { Button, Card, SearchBar } from 'react-native-elements'
+import Ionicons from "react-native-vector-icons/Ionicons";
+import {State, Repo} from "../interfaces";
+import ReposList from "../components/ReposList";
 
-import {allRepos} from "../mockedData";
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
-interface Props {
-    navigation: any
-}
-
-export default class AllRepos extends React.Component<Props> {
-  state = {
-    search: '',
-  };
-
-  private updateSearch = (search: any) => {
-    this.setState({ search });
-    console.log(search);
-  };
-  public render = () => {
-      console.log(this.props);
+const AllRepos = (props: any) => {
     Ionicons.loadFont();
-    const { search } = this.state;
+    const storedRepos: Repo[] = useSelector((state: State) => state.repos.repos);
     return (
         <View>
             <SearchBar
                 containerStyle={{backgroundColor: "#fff"}}
                 inputContainerStyle={{backgroundColor: "#fff"}}
                 placeholder="Type Here..."
-                onChangeText={this.updateSearch}
-                value={search}
+                onChangeText={() => {}}
+                value={""}
                 lightTheme
                 searchIcon={
                 <Ionicons
@@ -49,52 +29,18 @@ export default class AllRepos extends React.Component<Props> {
                 />
                 }
             />
-            <FlatList
-            contentContainerStyle={styles.body}
-            horizontal={false}
-            numColumns={2}
-            data={allRepos.sort((a, b) => (a.stargazers_count > b.stargazers_count) ? -1 : 1)}
-            renderItem={({item}) => (
-            <Card title={item.name} containerStyle={styles.tabRepos}>
-                <View style={{marginBottom: 10, justifyContent: "center", flexDirection: "row"}}>
-                <Ionicons
-                    size={16}
-                    name='ios-star'
-                    color='#000000'
-                />
-                <Text style={{marginLeft: 5, fontSize: 14}}>
-                {item.stargazers_count.toString()}
-                </Text>
-                </View>
-                <Button
-                    icon={<Ionicons size={26} name='ios-code' color='#ffffff' style={{marginHorizontal: 5, marginTop: 5}} />}
-                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0,}}
-                    title='Details'
-                    onPress={() => {this.props.navigation.navigate("RepoDetails")}}
-                />
-            </Card>
-            )}
-            />
+            <ReposList
+                displayedRepos={storedRepos}
+                navigation={props.navigation}
+             />
+            
         </View>
     );
-  }
-}
+};
 
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-},
-body: {
-    paddingVertical: 10,
-    paddingBottom: 50,
-    backgroundColor: Colors.white,
-  },
-  tabRepos: {
-    width: 165,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-});
+AllRepos.navigationOptions = {
+    headerTitle: "All Repositories"
+};
+
+export default AllRepos;
