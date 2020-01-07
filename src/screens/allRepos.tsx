@@ -1,12 +1,12 @@
 import React from 'react';
-import {useSelector} from "react-redux";
+import {useSelector} from 'react-redux';
 import { View } from 'react-native';
 
 import { SearchBar } from 'react-native-elements'
 
-import Ionicons from "react-native-vector-icons/Ionicons";
-import {State, Repo} from "../interfaces";
-import ReposList from "../components/ReposList";
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {State, Repo} from '../interfaces';
+import ReposList from '../components/ReposList';
 
 
 const AllRepos = (props: any) => {
@@ -15,11 +15,11 @@ const AllRepos = (props: any) => {
     return (
         <View>
             <SearchBar
-                containerStyle={{backgroundColor: "#fff"}}
-                inputContainerStyle={{backgroundColor: "#fff"}}
-                placeholder="Type Here..."
+                containerStyle={{backgroundColor: '#fff'}}
+                inputContainerStyle={{backgroundColor: '#fff'}}
+                placeholder='Type Here...'
                 onChangeText={() => {}}
-                value={""}
+                value={''}
                 lightTheme
                 searchIcon={
                 <Ionicons
@@ -40,7 +40,7 @@ const AllRepos = (props: any) => {
 
 
 AllRepos.navigationOptions = {
-    headerTitle: "All Repositories"
+    headerTitle: 'All Repositories'
 };
 
 export default AllRepos;

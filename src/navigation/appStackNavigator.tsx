@@ -1,11 +1,11 @@
-import React from "react";
-import {createAppContainer} from "react-navigation";
-import {createStackNavigator} from "react-navigation-stack";
-import { createBottomTabNavigator } from "react-navigation-tabs";
-import RepoDetails from "../screens/repoDetails";
-import AllRepos from "../screens/allRepos";
-import StarredByMeScreen from "../screens/starredByMe";
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import React from 'react';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import RepoDetails from '../screens/repoDetails';
+import AllRepos from '../screens/allRepos';
+import StarredByMeScreen from '../screens/starredByMe';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const ReposNavigator = createStackNavigator({
     AllRepos: AllRepos,
@@ -36,7 +36,7 @@ const ReposTabNavigator = createBottomTabNavigator({
         screen: ReposNavigator,
         navigationOptions: {
             tabBarIcon: (tabInfo) => {
-                return (<Ionicons
+                return (<Icon
                     name='logo-github'
                     size={23}
                     color={tabInfo.tintColor}
@@ -48,8 +48,8 @@ const ReposTabNavigator = createBottomTabNavigator({
         screen: StarredReposNav,
         navigationOptions: {
             tabBarIcon: (tabInfo) => {
-                return (<Ionicons
-                    name='ios-star'
+                return (<Icon
+                    name='md-star'
                     size={23}
                     color={tabInfo.tintColor}
                 />);

@@ -1,4 +1,4 @@
-import { Repo } from "../interfaces";
+import { Repo } from '../interfaces';
 
 export const TOGGLE_STAR = 'TOGGLE_STAR';
 

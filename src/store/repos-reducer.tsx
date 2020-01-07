@@ -1,6 +1,6 @@
-import {allRepos} from "../mockedData";
-import {State, Repo} from "../interfaces";
-import { TOGGLE_STAR } from "./repos-actions";
+import {allRepos} from '../mockedData';
+import {State, Repo} from '../interfaces';
+import { TOGGLE_STAR } from './repos-actions';
 
 const initialState: State = {
     repos: allRepos,
