@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import ReposHeaderButton from '../components/HeaderButton';
 import {toggleStarred} from '../store/repos-actions';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const RepoDetails = (props: any) => {
     const id =  props.navigation.getParam('reposId');
@@ -29,11 +30,16 @@ const RepoDetails = (props: any) => {
 
     return (
         <View style={styles.screen}>
-            <Text>Repo details</Text>
-            <Text>{selectedRepo.id}</Text>
-            <Text>{selectedRepo.name}</Text>
-            <Text>{selectedRepo.description}</Text>
-            <Text>{selectedRepo.stargazers_count}</Text>
+            <Text style={styles.textTitle}>Repo details</Text>
+            <Text style={styles.textSubTitle}>{selectedRepo.name}</Text>
+            <Text style={styles.textStyle}>{selectedRepo.description}</Text>
+            <Text style={styles.textStyle}>
+                <Ionicons
+                    size={20}
+                    name='md-star'
+                    color='goldenrod'
+                /> {selectedRepo.stargazers_count}
+            </Text>
         </View>
     );
 }
@@ -57,7 +63,22 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'flex-start'
+    },
+    textTitle: {
+        fontSize: 20,
+        fontWeight: '800',
+        lineHeight: 50,
+    },
+    textSubTitle: {
+        fontSize: 20,
+        fontWeight: "600",
+        lineHeight: 35,
+    },
+    textStyle: {
+        fontSize: 18,
+        textAlign: 'center',
+        lineHeight: 30,
     }
 });
 

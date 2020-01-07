@@ -1,6 +1,7 @@
 import {allRepos} from '../mockedData';
 import {State, Repo} from '../interfaces';
 import { TOGGLE_STAR } from './repos-actions';
+import { getStarredRepos } from './reducer-util';
 
 const initialState: State = {
     repos: allRepos,
@@ -10,17 +11,7 @@ const initialState: State = {
 const reposReducer = (state: State = initialState, action: any) => {
     switch (action.type) {
         case TOGGLE_STAR:
-            const existingIndex = state.starredByMeRepos.findIndex((repo: Repo) => repo.id === action.starredRepo.id);
-            if(existingIndex >= 0) {
-                const updatedStarredRepos = [...state.starredByMeRepos];
-                updatedStarredRepos.splice(existingIndex, 1);
-                return {...state, starredByMeRepos: updatedStarredRepos};
-            } else {
-                const iRepo = state.repos.find(
-                    (repo: Repo) => repo.id === action.starredRepo.id);
-                return {...state, starredByMeRepos: state.starredByMeRepos.concat(iRepo)}
-
-            }
+            return { ...state, starredByMeRepos: getStarredRepos(state, action.starredRepo) }
         default:
             return state;
     }

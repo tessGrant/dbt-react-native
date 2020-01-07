@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, SearchBar } from 'react-native-elements';
+import { Button, Card } from 'react-native-elements';
 import {useSelector} from 'react-redux';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
