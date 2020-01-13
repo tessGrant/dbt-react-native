@@ -1,17 +1,25 @@
-import React from 'react';
-import {useSelector} from 'react-redux';
+import React, { useEffect } from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import { View } from 'react-native';
 
-import { SearchBar } from 'react-native-elements'
+import { SearchBar } from 'react-native-elements';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {State, Repo} from '../interfaces';
 import ReposList from '../components/ReposList';
+import { getAllRepos } from '../store/repos-actions';
 
 
 const AllRepos = (props: any) => {
     Ionicons.loadFont();
     const storedRepos: Repo[] = useSelector((state: State) => state.repos.repos);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllRepos());
+    }, [dispatch]);
+
+
     return (
         <View>
             <SearchBar
