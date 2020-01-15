@@ -4,13 +4,16 @@ export interface Repo {
     stargazers_count: number,
     forks: number,
     description: string,
-    owner: {
-        avatar_url: string,
-        login: string
-    }
+};
+
+export interface Profile {
+    name: string,
+    login: string,
+    avatar_url: string,
 };
 
 export interface State  {
     repos: any,
-    starredByMeRepos: any
+    starredByMeRepos: any,
+    owner: any
 };

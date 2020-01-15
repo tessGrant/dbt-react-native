@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { View } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
-import { SearchBar } from 'react-native-elements';
+import { Avatar, SearchBar } from 'react-native-elements';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {State, Repo} from '../interfaces';
+import {State, Repo, Profile} from '../interfaces';
 import ReposList from '../components/ReposList';
-import { getAllRepos } from '../store/repos-actions';
+import { getAllRepos, getProfile } from '../store/repos-actions';
 
 
 const AllRepos = (props: any) => {
-
+    const repoOwner: Profile = useSelector((state: State) => state.repos.owner)
     const storedRepos: Repo[] = useSelector((state: State) => state.repos.repos);
     const dispatch = useDispatch();
 
@@ -26,9 +26,8 @@ const AllRepos = (props: any) => {
         setFilteredRepos(res);
     }
 
-    useEffect(() => {
-        dispatch(getAllRepos());
-    }, [dispatch]);
+    useEffect(() => {dispatch(getAllRepos())}, [dispatch]);
+    useEffect(() => {dispatch(getProfile())}, [dispatch]);
     
     return (
         <View>
@@ -47,11 +46,19 @@ const AllRepos = (props: any) => {
                 />
                 }
             />
+            <View style={styles.ownerCard}>
+                <Avatar
+                    containerStyle={{ marginRight: 10}}
+                    rounded
+                    size="small"
+                    source={{uri: `${repoOwner.avatar_url}`}}
+                />
+                <Text style={styles.textSubTitle}>{repoOwner.name} / {repoOwner.login}</Text>
+            </View>
             <ReposList
                 displayedRepos={repos}
                 navigation={props.navigation}
-             />
-            
+                />
         </View>
     );
 };
@@ -60,5 +67,21 @@ const AllRepos = (props: any) => {
 AllRepos.navigationOptions = {
     headerTitle: 'All Repositories'
 };
+
+const styles = StyleSheet.create({
+    ownerCard: {
+        display: 'flex',
+        flexDirection: 'row',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        alignItems: 'stretch',
+        alignSelf: 'flex-start',
+    },
+    textSubTitle: {
+        fontSize: 16,
+        fontWeight: "600",
+        paddingVertical: 5,
+    },
+});
 
 export default AllRepos;
