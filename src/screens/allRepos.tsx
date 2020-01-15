@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { View } from 'react-native';
 
@@ -11,23 +11,33 @@ import { getAllRepos } from '../store/repos-actions';
 
 
 const AllRepos = (props: any) => {
-    Ionicons.loadFont();
+
     const storedRepos: Repo[] = useSelector((state: State) => state.repos.repos);
     const dispatch = useDispatch();
+
+    const [repos, setFilteredRepos] = useState(storedRepos);
+    const [search, setSearch] = useState("");
+
+    const handleSearchInput = (val: string) => {
+        setSearch(val);
+        const res = storedRepos.filter(repo => {
+            return repo.name.toLowerCase().includes(val.toLowerCase());
+        });
+        setFilteredRepos(res);
+    }
 
     useEffect(() => {
         dispatch(getAllRepos());
     }, [dispatch]);
-
-
+    
     return (
         <View>
             <SearchBar
                 containerStyle={{backgroundColor: '#fff'}}
                 inputContainerStyle={{backgroundColor: '#fff'}}
                 placeholder='Type Here...'
-                onChangeText={() => {}}
-                value={''}
+                onChangeText={value => handleSearchInput(value)}
+                value={search}
                 lightTheme
                 searchIcon={
                 <Ionicons
@@ -38,7 +48,7 @@ const AllRepos = (props: any) => {
                 }
             />
             <ReposList
-                displayedRepos={storedRepos}
+                displayedRepos={repos}
                 navigation={props.navigation}
              />
             

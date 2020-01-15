@@ -17,7 +17,6 @@ interface IProps {
 const ReposList = (props: IProps) => {
   const starredByMeRepos = useSelector((state: State) => state.repos.starredByMeRepos);
   const renderRepoItem = (item: Repo) => {
-    // console.log("OMG!!!!", item);
     const isStarredByMeRepo = starredByMeRepos.some((repo: Repo) => repo.id === item.id);
     return (
       <Card title={item.name} containerStyle={styles.tabRepos}>
