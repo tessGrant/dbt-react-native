@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
       marginTop: 32,
       paddingHorizontal: 24,
     },
-  });
+});
   
 
 export default ReposList;

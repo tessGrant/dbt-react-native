@@ -31,15 +31,17 @@ const RepoDetails = (props: any) => {
     return (
         <View style={styles.screen}>
             <Text style={styles.textTitle}>Repo details</Text>
-            <Text style={styles.textSubTitle}>{selectedRepo.name}</Text>
-            <Text style={styles.textStyle}>{selectedRepo.description}</Text>
-            <Text style={styles.textStyle}>
-                <Ionicons
-                    size={20}
-                    name='md-star'
-                    color='goldenrod'
-                /> {selectedRepo.stargazers_count}
-            </Text>
+            <View style={styles.detailsCard}>
+                <Text style={styles.textSubTitle}>Repo name: {selectedRepo.name}</Text>
+                <Text style={styles.textStyle}>Description:  {selectedRepo.description}</Text>
+                <Text style={styles.starStyle}>
+                    <Ionicons
+                        size={20}
+                        name='md-star'
+                        color='goldenrod'
+                    /> {selectedRepo.stargazers_count}
+                </Text>
+            </View>
         </View>
     );
 }
@@ -60,20 +62,30 @@ RepoDetails.navigationOptions = (navigationData: any) => {
 };
 
 const styles = StyleSheet.create({
+    detailsCard: {
+        paddingVertical: 10,
+    },
     screen: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'flex-start'
     },
+    starStyle: {
+        textAlign: 'left',
+        fontSize: 16,
+        paddingVertical: 15,
+    },
     textTitle: {
         fontSize: 20,
         fontWeight: '800',
-        lineHeight: 50,
+        paddingVertical: 25
     },
     textSubTitle: {
         fontSize: 20,
         fontWeight: "600",
-        lineHeight: 35,
+        paddingVertical: 15,
+        borderBottomColor: 'grey',
+        borderBottomWidth: 1
     },
     textStyle: {
         fontSize: 18,
