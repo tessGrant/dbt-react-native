@@ -27,8 +27,6 @@ const AllRepos = (props: any) => {
 
   useEffect(() => {
     dispatch(getAllRepos());
-  }, []);
-  useEffect(() => {
     dispatch(getProfile());
   }, []);
 
