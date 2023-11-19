@@ -1,36 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native';
 
 import { Avatar, SearchBar } from '@rneui/themed';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { State, Repo, Profile } from '../types';
+import { Repo } from '../types';
 import ReposList from '../components/ReposList';
-import { getAllRepos } from '../api/getAllRepos';
-import { getProfile } from '../api/getProfile';
+import { useGetProfileQuery, useGetReposQuery } from '../redux/apiSlice';
 
 const AllRepos = () => {
-  const repoOwner: Profile = useSelector((state: State) => state.repos.owner);
-  const storedRepos: Repo[] = useSelector((state: State) => state.repos.repos);
-  const dispatch = useDispatch();
-
-  const [repos, setFilteredRepos] = useState(storedRepos);
   const [search, setSearch] = useState('');
+  const { data: reposData, isLoading } = useGetReposQuery();
+  const [repos, setRepos] = useState(reposData);
+  const { data: repoOwner, isLoading: ownerIsLoading } = useGetProfileQuery();
 
   const handleSearchInput = (val: string) => {
     setSearch(val);
-    const res = storedRepos.filter((repo) =>
+    const res = repos?.filter((repo) =>
       repo.name.toLowerCase().includes(val.toLowerCase())
     );
-    setFilteredRepos(res);
+    setRepos(res);
   };
-  // fix the STORE!!!
+
   useEffect(() => {
-    dispatch(getAllRepos());
-    dispatch(getProfile());
-    return setFilteredRepos(storedRepos);
-  }, []);
+    if (!search) {
+      setRepos(reposData);
+    }
+  }, [search]);
+
+  if (!reposData?.length || isLoading || ownerIsLoading) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
 
   return (
     <View>
@@ -48,13 +52,13 @@ const AllRepos = () => {
           containerStyle={{ marginRight: 10 }}
           rounded
           size='small'
-          source={{ uri: `${repoOwner.avatar_url}` }}
+          source={{ uri: `${repoOwner?.avatar_url}` }}
         />
         <Text style={styles.textSubTitle}>
-          {repoOwner.name} / {repoOwner.login}
+          {repoOwner?.name} / {repoOwner?.login}
         </Text>
       </View>
-      <ReposList displayedRepos={repos} />
+      <ReposList displayedRepos={repos ?? []} />
     </View>
   );
 };

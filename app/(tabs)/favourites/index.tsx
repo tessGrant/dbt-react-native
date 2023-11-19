@@ -1,16 +1,18 @@
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import React from 'react';
 import { Stack } from 'expo-router';
-import StarredByMeScreen from '../../src/screens/starredByMe';
+import StarredByMe from '../../src/screens/starredByMe';
 import { Provider } from 'react-redux';
-import { store } from '../../src/store';
+import store from '../../src/redux/store';
 
 const Favourites = () => {
   return (
-    <Provider store={store}>
-      <Stack.Screen options={{ headerShown: true, title: 'Favourites' }} />
-      <StarredByMeScreen />
-    </Provider>
+    <View>
+      <Provider store={store}>
+        <Stack.Screen options={{ headerShown: true, title: 'Favourites' }} />
+        <StarredByMe />
+      </Provider>
+    </View>
   );
 };
 
