@@ -1,6 +1,6 @@
 import 'jest';
-import { getStarredRepos } from '../app/src/store/reducer-util';
-import { Repo } from '../app/src/interfaces';
+import { getStarredRepos } from '../app/src/store/utils';
+import { Repo } from '../app/src/types';
 
 const testRepo: Repo = {
   id: 123,

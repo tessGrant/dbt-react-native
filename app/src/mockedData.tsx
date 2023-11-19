@@ -1,4 +1,4 @@
-import { Repo } from './interfaces';
+import { Repo } from './types';
 
 export const allRepos: Repo[] = [
   {

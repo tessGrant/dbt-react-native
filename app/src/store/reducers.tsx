@@ -1,6 +1,6 @@
-import { State } from '../interfaces';
-import { TOGGLE_STAR, GET_ALL_REPOS, GET_PERSON } from './repos-actions';
-import { getStarredRepos } from './reducer-util';
+import { State } from '../types';
+import { TOGGLE_STAR, GET_ALL_REPOS, GET_PERSON } from './actions';
+import { getStarredRepos } from './utils';
 
 const initialState: State = {
   repos: [],

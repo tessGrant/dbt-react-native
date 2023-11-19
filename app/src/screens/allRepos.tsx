@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native';
 
-import { Avatar, SearchBar } from 'react-native-elements';
+import { Avatar, SearchBar } from '@rneui/themed';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { State, Repo, Profile } from '../interfaces';
+import { State, Repo, Profile } from '../types';
 import ReposList from '../components/ReposList';
-import { getAllRepos, getProfile } from '../store/repos-actions';
+import { getAllRepos } from '../api/getAllRepos';
+import { getProfile } from '../api/getProfile';
 
-const AllRepos = (props: any) => {
+const AllRepos = () => {
   const repoOwner: Profile = useSelector((state: State) => state.repos.owner);
   const storedRepos: Repo[] = useSelector((state: State) => state.repos.repos);
   const dispatch = useDispatch();
@@ -19,28 +20,29 @@ const AllRepos = (props: any) => {
 
   const handleSearchInput = (val: string) => {
     setSearch(val);
-    const res = storedRepos.filter((repo) => {
-      return repo.name.toLowerCase().includes(val.toLowerCase());
-    });
+    const res = storedRepos.filter((repo) =>
+      repo.name.toLowerCase().includes(val.toLowerCase())
+    );
     setFilteredRepos(res);
   };
-
+  // fix the STORE!!!
   useEffect(() => {
-    // dispatch(getAllRepos());
-    // dispatch(getProfile());
+    dispatch(getAllRepos());
+    dispatch(getProfile());
+    setFilteredRepos(storedRepos);
   }, []);
 
   return (
     <View>
-      {/* <SearchBar
+      <SearchBar
         containerStyle={{ backgroundColor: '#fff' }}
         inputContainerStyle={{ backgroundColor: '#fff' }}
         placeholder='Type Here...'
         onChangeText={(value) => handleSearchInput(value)}
         value={search}
         lightTheme
-        searchIcon={<Ionicons size={16} name='ios-search' color='#000000' />}
-      /> */}
+        searchIcon={<Ionicons name='ios-search' size={16} color='#000000' />}
+      />
       <View style={styles.ownerCard}>
         <Avatar
           containerStyle={{ marginRight: 10 }}
@@ -52,13 +54,9 @@ const AllRepos = (props: any) => {
           {repoOwner.name} / {repoOwner.login}
         </Text>
       </View>
-      <ReposList displayedRepos={repos} navigation={props.navigation} />
+      <ReposList displayedRepos={repos} />
     </View>
   );
-};
-
-AllRepos.navigationOptions = {
-  headerTitle: 'All Repositories',
 };
 
 const styles = StyleSheet.create({
