@@ -29,7 +29,7 @@ const AllRepos = () => {
   useEffect(() => {
     dispatch(getAllRepos());
     dispatch(getProfile());
-    setFilteredRepos(storedRepos);
+    return setFilteredRepos(storedRepos);
   }, []);
 
   return (

@@ -7,6 +7,7 @@ import { State, Repo } from '../types';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Link, useNavigation } from 'expo-router';
+import RepoDetailsScreen from '../../(tabs)/home/repoDetailsScreen';
 
 interface IProps {
   displayedRepos: Repo[];
@@ -31,17 +32,13 @@ const ReposList = (props: IProps) => {
             {item.stargazers_count.toString()}
           </Text>
         </View>
-        <Link href={'/home/next-page'}>
-          <Button
-            buttonStyle={styles.tabButton}
-            onPress={() =>
-              navigation.navigate('Home', {
-                screen: 'repoDetailsScreen',
-                params: { reposId: item.id },
-              })
-            }>
-            Go to Details
-          </Button>
+        <Link
+          href={{
+            pathname: '/home/repoDetailsScreen',
+            params: { repoId: item.id },
+          }}
+          style={styles.tabButton}>
+          <Text>Go to Details</Text>
         </Link>
       </Card>
     );
@@ -71,6 +68,9 @@ const styles = StyleSheet.create({
   },
   tabRepos: {
     width: 165,
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
   },
   repoInfo: {
     marginBottom: 10,
@@ -82,6 +82,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   tabButton: {
+    width: '90%',
+    height: 40,
     padding: 10,
     color: 'white',
     textAlign: 'center',

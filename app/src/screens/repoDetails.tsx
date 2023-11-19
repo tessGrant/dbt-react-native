@@ -6,15 +6,14 @@ import ReposHeaderButton from '../components/HeaderButton';
 import { toggleStarred } from '../store/actions';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useRoute } from '@react-navigation/native';
-import { useNavigation } from 'expo-router';
+import { useLocalSearchParams, useNavigation } from 'expo-router';
 
 const RepoDetails = () => {
-  const route = useRoute();
+  const { repoId } = useLocalSearchParams();
   const navigation = useNavigation();
-  const { reposId } = route.params;
   const allRepos: Repo[] = useSelector((state: State) => state.repos.repos);
   // @ts-ignore
-  const selectedRepo: Repo = allRepos.find((item) => item.id === reposId);
+  const selectedRepo: Repo = allRepos.find((item) => item.id === repoId);
   const activeFavoriteRepo = useSelector((state: State) =>
     state.repos.starredByMeRepos.some(
       (repo: Repo) => repo.id === selectedRepo.id
@@ -38,14 +37,15 @@ const RepoDetails = () => {
     <View style={styles.screen}>
       <Text style={styles.textTitle}>Repo details</Text>
       <View style={styles.detailsCard}>
-        <Text style={styles.textSubTitle}>Repo name: {selectedRepo.name}</Text>
+        <Text>{repoId}</Text>
+        {/* <Text style={styles.textSubTitle}>Repo name: {selectedRepo.name}</Text>
         <Text style={styles.textStyle}>
           Description: {selectedRepo.description}
         </Text>
         <Text style={styles.starStyle}>
           <Ionicons size={20} name='md-star' color='goldenrod' />{' '}
           {selectedRepo.stargazers_count}
-        </Text>
+        </Text> */}
       </View>
     </View>
   );
