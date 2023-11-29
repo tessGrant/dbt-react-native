@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useLocalSearchParams } from 'expo-router';
-import { useGetReposQuery } from '../redux/apiSlice';
+import { useGetReposQuery } from '../src/redux/apiSlice';
 
 const RepoDetails = () => {
   const { repoId } = useLocalSearchParams();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Stack } from 'expo-router';
 import { View } from 'react-native';
-import RepoDetails from '../../src/screens/repoDetails';
+import RepoDetails from '../../screens/repoDetails';
 import { Provider } from 'react-redux';
 import store from '../../src/redux/store';
 

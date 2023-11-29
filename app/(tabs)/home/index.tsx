@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stack } from 'expo-router';
-import AllRepos from '../../src/screens/allRepos';
+import AllRepos from '../../screens/allRepos';
 import { Provider } from 'react-redux';
 import store from '../../src/redux/store';
 import { View } from 'react-native';

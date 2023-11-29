@@ -4,9 +4,9 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Avatar, SearchBar } from '@rneui/themed';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { Repo } from '../types';
-import ReposList from '../components/ReposList';
-import { useGetProfileQuery, useGetReposQuery } from '../redux/apiSlice';
+import { Repo } from '../src/types';
+import ReposList from '../src/components/ReposList';
+import { useGetProfileQuery, useGetReposQuery } from '../src/redux/apiSlice';
 
 const AllRepos = () => {
   const [search, setSearch] = useState('');
